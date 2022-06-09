@@ -1,0 +1,40 @@
+{% extends 'partials/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+<div class="container">
+    <form enctype="multipart/form-data" action="{{form_action}}" method="post">
+        {% csrf_token %}
+
+        <div class="container">
+            <div class="container">
+                <h3 class="text-center"> Agendando consulta com: {{medico.nome_completo}}</h3>
+            </div>
+
+            {{forms|crispy}}
+
+
+            {% for error in forms.errors %}
+            {{error}}
+            {% endfor %}
+
+
+            {% if forms.help_text %}
+            {{forms.help_text}}
+            {% endif %}
+        </div>
+
+
+
+        <br><br>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary text-decoration-none">Enviar</button>
+
+        </div>
+
+
+    </form>
+</div>
+
+{% endblock conteudo %}

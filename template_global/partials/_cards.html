@@ -1,0 +1,60 @@
+<div class="container-md mx-auto mt-5">
+  <div class="row p-2">
+    {% for medico in medicos %}
+    <div class="col p-2">
+      <div class="card" style="width: 19rem">
+
+        <a href="{% url 'clinica:medico' medico.id%}" class="text-decoration-none"> 
+        <img src="{{medico.img.url}}" class="card-img-top img-thumbnail" style="height: 25rem">
+        </a>
+        <div class="card-body">
+          <a href="{% url 'clinica:medico' medico.id%}" class="text-decoration-none">
+            <h5 class="card-title">{{medico.nome_completo}}</h5>
+          </a>
+          <a href="{% url 'clinica:especialidade' medico.especialidade.id %}" class="text-decoration-none">
+            <p class="card-text">{{medico.especialidade}}</p>
+          </a>
+          <a href="{% url 'clinica:medico' medico.id %}" class="text-decoration-none">
+            <p class="card-text">CRM: {{medico.crm}}</p>
+          </a>
+          <br>
+          <a href="{% url 'clinica:medico' medico.id %}" class="btn btn-primary text-decoration-none">Saber mais</a>
+        </div>
+      </div>
+
+     
+    </div>
+    {% empty %}
+        <div class="container">
+            <h1>Medicos não encontrados🥲</h1>
+        </div>
+    {% endfor %}
+
+    <div class="container p-3 "> 
+
+     
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="?page=1">Primeira</a></li>
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a href="?page={{page_obj.previous_page_number}}" class="page-link text-decoration-none">Anterior</a>
+          </li>
+          {% endif %}
+          
+          {% if page_obj.has_next %}
+          <li class="page-item">        
+            <a href="?page={{page_obj.next_page_number}}" class=" page-link text-decoration-none">Proximo</a>
+          </li>
+          {% endif %}
+
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última</a></li>
+        </ul>
+      </nav>
+     
+    </div>
+  </div>
+
+</div>
+
+
